@@ -1,18 +1,18 @@
-package Shared;
+package ServerSide;
 
 import org.w3c.dom.*;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
 
-public class ConfigurazioneXML {
+public class DatabaseMenager {
 
     private int portaServer;
     private String dbUrl;
     private String dbUsername;
     private String dbPassword;
 
-    public ConfigurazioneXML(String percorsoFile) {
+    public DatabaseMenager(String percorsoFile) {
         try {
             File xmlFile = new File(percorsoFile);
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
