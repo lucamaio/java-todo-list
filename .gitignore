@@ -1,0 +1,17 @@
+# File compilati
+*.class
+
+# Librerie
+lib/*.jar
+
+# Impostazioni IDE
+.vscode/
+*.iml
+.idea/
+
+# Output build
+/bin/
+/out/
+
+# Altro
+.DS_Store
