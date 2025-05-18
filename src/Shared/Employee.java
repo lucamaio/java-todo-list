@@ -3,21 +3,21 @@ package Shared;
 import java.util.ArrayList;
 import java.util.List;
 
-public class User implements Utente{
+public class Employee implements Utente{
     
     private int id;
     private String username;
     private List<Attivita> listaAttività = new ArrayList<>();
 
     // Constructor
-    public User(String username) {
+    public Employee(String username) {
         setId();
         setUsername(username);
     }
 
    
 
-    public User(int id, String username){
+    public Employee(int id, String username){
         setId(id);
         setUsername(username);
     }
@@ -44,7 +44,6 @@ public class User implements Utente{
     }
 
 
-
     private void setUsername(String username) {
         this.username = username;
     }
@@ -53,6 +52,12 @@ public class User implements Utente{
 
     public String getRuolo(){
         return "user";
+    }
+
+    public String getInfo(){
+        String info=null;
+        info="Username: "+username+" Ruolo: "+getRuolo()+"\n";
+        return info;
     }
 
     public void aggiungiAttività(Attivita a) {
@@ -70,4 +75,5 @@ public class User implements Utente{
             System.out.println(attivita.getInfo());
         }
     }
+
 }

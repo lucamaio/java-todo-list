@@ -1,12 +1,12 @@
 package Shared;
 import java.time.LocalDate; 
 
-public class Maneger implements Utente {
+public class Manager implements Utente {
     private int id;
     private String username;
 
     // costruttore
-    public Maneger(String username) {
+    public Manager(String username) {
         setId();
         setUsername(username);
     }
@@ -40,8 +40,8 @@ public class Maneger implements Utente {
     }
     // Metodo assegna attivita
 
-    public void assegnaAttivita(String titolo, String descrizione, LocalDate data_scadenza, User utente){
-        Attivita newAttivita= new Attivita(titolo, descrizione,data_scadenza, this, utente);
+    public void assegnaAttivita(String titolo, String descrizione, LocalDate data_scadenza, Employee utente, TipoPriorita priorita){
+        Attivita newAttivita= new Attivita(titolo, descrizione,data_scadenza, this, utente, priorita);
         utente.aggiungiAttività(newAttivita);
         System.out.println("Attività assegnata a " + utente.getUsername());
     }

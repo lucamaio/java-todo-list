@@ -1,40 +1,61 @@
 package Shared;
 import java.time.LocalDate;         // Importo le classi che mi consentono di operare sulle date
 import java.time.LocalDateTime;
-import java.util.concurrent.ForkJoinPool.ManagedBlocker;
 
 public class Attivita {
 
+    // Dichiarazione variabili della classe
     private String titolo, descrizione;
     private int id;
     private LocalDate dataScadenza;
     private LocalDateTime dataCreazione;
-    // private TipoAttivita tipo;
+    private StatoAttivita stato;
+    private TipoPriorita priorita;
 
-    private Maneger maneger;
-    private User user;
+    private Manager maneger;
+    private Employee user;
 
-    public Attivita(String titolo, String descrizione,LocalDate dataScadenza, Maneger maneger, User user) {
+    // Costruttori
+
+    public Attivita(String titolo, String descrizione,LocalDate dataScadenza, Manager maneger, Employee user) {
         setId();
-        setDataCreazione(dataCreazione);
-        setTitolo(titolo);
-        setDescrizione(descrizione);   
-        setDataScadenza(dataScadenza);
-        setManeger(maneger);
-        setUser(user);
-    }
-
-    public Attivita(int id, String titolo, String descrizione, LocalDate dataScadenza, Maneger maneger, User user) {
-        setId(id);
         setDataCreazione();
         setTitolo(titolo);
         setDescrizione(descrizione);
         setDataScadenza(dataScadenza);
         setManeger(maneger);
         setUser(user);
+        setTipoPriorita();
+        this.stato.valueOf("DA FARE");
+    }
+
+    public Attivita(String titolo, String descrizione,LocalDate dataScadenza, Manager maneger, Employee user, TipoPriorita priorita) {
+        this(titolo,descrizione,dataScadenza,maneger,user);
+        setTipoPriorita(priorita);
+    }
+
+    public Attivita(int id, String titolo, String descrizione, LocalDate dataScadenza, Manager maneger, Employee user) {
+        this(titolo,descrizione,dataScadenza,maneger,user);
+        setId(id);
+    }
+
+    public Attivita(int id, String titolo, String descrizione, LocalDate dataScadenza, Manager maneger, Employee user, TipoPriorita priorita) {
+        this(titolo,descrizione,dataScadenza,maneger,user,priorita);
+        setId(id);
     }
 
     // Metodi Get e set
+     private void setTipoPriorita() {
+        this.priorita=this.priorita.valueOf("NESSUNA");
+    }
+
+    private void setTipoPriorita(TipoPriorita priorita) {
+        this.priorita=priorita;
+    }
+
+    public TipoPriorita getPriorita(){
+        return priorita;
+    }
 
     private String getTitolo() {
         return titolo;
@@ -77,28 +98,32 @@ public class Attivita {
         return dataCreazione;
     }
 
-    private void setDataCreazione(LocalDateTime dataCreazione) {
-        this.dataCreazione = dataCreazione;
-    }
-
     private void setDataCreazione() {
         this.dataCreazione = LocalDateTime.now();
     }
     
-    private void setManeger(Maneger maneger){
+    private void setManeger(Manager maneger){
         this.maneger=maneger;
     }
 
-    public Maneger getManeger(){
+    public Manager getManeger(){
         return maneger;
     }
 
-    private void setUser(User user){
+    private void setUser(Employee user){
         this.user=user;
     }
 
-    public User getUser(){
+    public Employee getUser(){
         return user;
+    }
+
+    public void setStato(StatoAttivita stato){
+        this.stato=stato;
+    }
+    
+    public StatoAttivita getStato(){
+        return stato;
     }
 
     public String getInfo(){
@@ -106,6 +131,8 @@ public class Attivita {
         info+="Titolo: "+this.getTitolo()+"\n";
         info+="Descrizione: "+this.getDescrizione()+"\n";
         info+="Data Scadenza: "+this.getDataScadenza()+"\n";
+        info+="Stato: "+getStato()+"\n";
+        info+="Priorità: "+getPriorita()+"\n";
         info+=maneger.getInfo();
         return info;
     }
